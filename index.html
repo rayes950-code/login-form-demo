@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign in</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg1: #6366f1;
+      --bg2: #8b5cf6;
+      --card: #ffffff;
+      --text: #1e293b;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --accent: #6366f1;
+    }
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: linear-gradient(135deg, var(--bg1), var(--bg2));
+      padding: 20px;
+      color: var(--text);
+    }
+    .card {
+      background: var(--card);
+      width: 100%;
+      max-width: 380px;
+      border-radius: 18px;
+      padding: 40px 34px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+      animation: rise .5s ease;
+    }
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .logo {
+      width: 54px; height: 54px;
+      margin: 0 auto 18px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--bg1), var(--bg2));
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 26px; font-weight: 700;
+    }
+    h1 { text-align: center; font-size: 22px; margin-bottom: 4px; }
+    .sub { text-align: center; color: var(--muted); font-size: 14px; margin-bottom: 26px; }
+    label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+    .field { margin-bottom: 18px; }
+    input {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 15px;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(99,102,241,0.15);
+    }
+    .row {
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 13px; margin-bottom: 22px;
+    }
+    .row a { color: var(--accent); text-decoration: none; }
+    .row label { display: flex; align-items: center; gap: 6px; font-weight: 400; margin: 0; color: var(--muted); }
+    button {
+      width: 100%;
+      padding: 13px;
+      border: none;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--bg1), var(--bg2));
+      color: #fff;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform .1s, opacity .2s;
+    }
+    button:hover { opacity: .92; }
+    button:active { transform: scale(.98); }
+    .foot { text-align: center; font-size: 13px; color: var(--muted); margin-top: 22px; }
+    .foot a { color: var(--accent); text-decoration: none; font-weight: 600; }
+    .msg {
+      text-align: center; font-size: 13px; margin-top: 16px;
+      color: #059669; min-height: 18px;
+    }
+  </style>
+</head>
+<body>
+  <form class="card" id="loginForm">
+    <div class="logo">✦</div>
+    <h1>Welcome back</h1>
+    <p class="sub">Sign in to continue to your account</p>
+
+    <div class="field">
+      <label for="email">Email</label>
+      <input type="email" id="email" placeholder="you@example.com" required />
+    </div>
+
+    <div class="field">
+      <label for="password">Password</label>
+      <input type="password" id="password" placeholder="••••••••" required />
+    </div>
+
+    <div class="row">
+      <label><input type="checkbox" /> Remember me</label>
+      <a href="#">Forgot password?</a>
+    </div>
+
+    <button type="submit">Sign in</button>
+
+    <p class="msg" id="msg"></p>
+    <p class="foot">Don't have an account? <a href="#">Sign up</a></p>
+  </form>
+
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      var email = document.getElementById('email').value;
+      document.getElementById('msg').textContent = 'Welcome, ' + email + '! (demo — no data is sent)';
+    });
+  </script>
+</body>
+</html>
