@@ -3,127 +3,166 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sign in</title>
+  <title>Nova — Do more, effortlessly</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --bg1: #6366f1;
-      --bg2: #8b5cf6;
-      --card: #ffffff;
-      --text: #1e293b;
-      --muted: #64748b;
-      --border: #e2e8f0;
+      --bg: #0b1020;
+      --bg2: #131a33;
+      --text: #e8ecf7;
+      --muted: #9aa5c4;
       --accent: #6366f1;
+      --accent2: #22d3ee;
+      --card: rgba(255,255,255,0.04);
+      --border: rgba(255,255,255,0.09);
     }
+    html { scroll-behavior: smooth; }
     body {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background: linear-gradient(135deg, var(--bg1), var(--bg2));
-      padding: 20px;
+      background: radial-gradient(1200px 600px at 70% -10%, #1c2550 0%, var(--bg) 55%);
       color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
     }
-    .card {
-      background: var(--card);
-      width: 100%;
-      max-width: 380px;
-      border-radius: 18px;
-      padding: 40px 34px;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.25);
-      animation: rise .5s ease;
-    }
-    @keyframes rise {
-      from { opacity: 0; transform: translateY(16px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    .logo {
-      width: 54px; height: 54px;
-      margin: 0 auto 18px;
-      border-radius: 14px;
-      background: linear-gradient(135deg, var(--bg1), var(--bg2));
-      display: flex; align-items: center; justify-content: center;
-      color: #fff; font-size: 26px; font-weight: 700;
-    }
-    h1 { text-align: center; font-size: 22px; margin-bottom: 4px; }
-    .sub { text-align: center; color: var(--muted); font-size: 14px; margin-bottom: 26px; }
-    label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; }
-    .field { margin-bottom: 18px; }
-    input {
-      width: 100%;
-      padding: 12px 14px;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      font-size: 15px;
-      transition: border-color .2s, box-shadow .2s;
-    }
-    input:focus {
-      outline: none;
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(99,102,241,0.15);
-    }
-    .row {
+    .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+    /* Nav */
+    nav {
       display: flex; align-items: center; justify-content: space-between;
-      font-size: 13px; margin-bottom: 22px;
+      padding: 22px 0;
     }
-    .row a { color: var(--accent); text-decoration: none; }
-    .row label { display: flex; align-items: center; gap: 6px; font-weight: 400; margin: 0; color: var(--muted); }
-    button {
-      width: 100%;
-      padding: 13px;
-      border: none;
-      border-radius: 10px;
-      background: linear-gradient(135deg, var(--bg1), var(--bg2));
-      color: #fff;
-      font-size: 15px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: transform .1s, opacity .2s;
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 19px; }
+    .brand .dot {
+      width: 30px; height: 30px; border-radius: 9px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      display: flex; align-items: center; justify-content: center; font-size: 16px;
     }
-    button:hover { opacity: .92; }
-    button:active { transform: scale(.98); }
-    .foot { text-align: center; font-size: 13px; color: var(--muted); margin-top: 22px; }
-    .foot a { color: var(--accent); text-decoration: none; font-weight: 600; }
-    .msg {
-      text-align: center; font-size: 13px; margin-top: 16px;
-      color: #059669; min-height: 18px;
+    .nav-links { display: flex; gap: 28px; align-items: center; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 14px; transition: color .2s; }
+    .nav-links a:hover { color: var(--text); }
+    .btn {
+      display: inline-block; cursor: pointer; border: none;
+      padding: 11px 20px; border-radius: 10px; font-size: 14px; font-weight: 600;
+      text-decoration: none; transition: transform .1s, opacity .2s;
+    }
+    .btn-primary { background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #07122b; }
+    .btn-primary:hover { opacity: .9; }
+    .btn:active { transform: scale(.97); }
+    .btn-ghost { background: var(--card); color: var(--text); border: 1px solid var(--border); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 70px 0 60px; }
+    .pill {
+      display: inline-block; font-size: 12.5px; color: var(--accent2);
+      border: 1px solid var(--border); background: var(--card);
+      padding: 6px 14px; border-radius: 999px; margin-bottom: 26px; letter-spacing: .3px;
+    }
+    .hero h1 {
+      font-size: clamp(34px, 6vw, 58px); line-height: 1.08; letter-spacing: -1px;
+      margin-bottom: 20px; font-weight: 800;
+    }
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .hero p { color: var(--muted); font-size: 18px; max-width: 560px; margin: 0 auto 34px; }
+    .cta-row { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+    /* Features */
+    .features { padding: 30px 0 60px; }
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 16px; padding: 26px; transition: transform .2s, border-color .2s;
+    }
+    .card:hover { transform: translateY(-4px); border-color: rgba(99,102,241,0.5); }
+    .card .ico {
+      width: 44px; height: 44px; border-radius: 11px; margin-bottom: 16px; font-size: 20px;
+      display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(135deg, rgba(99,102,241,.25), rgba(34,211,238,.25));
+    }
+    .card h3 { font-size: 17px; margin-bottom: 8px; }
+    .card p { color: var(--muted); font-size: 14.5px; }
+
+    /* Stats */
+    .stats { display: flex; justify-content: center; gap: 60px; flex-wrap: wrap; padding: 30px 0 20px; }
+    .stat { text-align: center; }
+    .stat b { display: block; font-size: 32px; font-weight: 800;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    .stat span { color: var(--muted); font-size: 13px; }
+
+    /* CTA band */
+    .band {
+      margin: 60px 0; padding: 46px 30px; text-align: center;
+      background: linear-gradient(135deg, rgba(99,102,241,.18), rgba(34,211,238,.12));
+      border: 1px solid var(--border); border-radius: 22px;
+    }
+    .band h2 { font-size: 28px; margin-bottom: 10px; }
+    .band p { color: var(--muted); margin-bottom: 24px; }
+
+    footer { padding: 34px 0; text-align: center; color: var(--muted); font-size: 13px; border-top: 1px solid var(--border); }
+
+    @media (max-width: 760px) {
+      .grid { grid-template-columns: 1fr; }
+      .nav-links a:not(.btn) { display: none; }
     }
   </style>
 </head>
 <body>
-  <form class="card" id="loginForm">
-    <div class="logo">✦</div>
-    <h1>Welcome back</h1>
-    <p class="sub">Sign in to continue to your account</p>
+  <div class="wrap">
+    <nav>
+      <div class="brand"><span class="dot">✦</span> Nova</div>
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#stats">Why Nova</a>
+        <a href="#start" class="btn btn-primary">Get started</a>
+      </div>
+    </nav>
 
-    <div class="field">
-      <label for="email">Email</label>
-      <input type="email" id="email" placeholder="you@example.com" required />
-    </div>
+    <header class="hero">
+      <span class="pill">✨ New — now with AI workflows</span>
+      <h1>Do more, <span>effortlessly.</span></h1>
+      <p>Nova brings your tasks, team, and tools into one calm workspace — so you can focus on the work that actually matters.</p>
+      <div class="cta-row">
+        <a href="#start" class="btn btn-primary">Start free</a>
+        <a href="#features" class="btn btn-ghost">See how it works</a>
+      </div>
+    </header>
 
-    <div class="field">
-      <label for="password">Password</label>
-      <input type="password" id="password" placeholder="••••••••" required />
-    </div>
+    <section class="features" id="features">
+      <div class="grid">
+        <div class="card">
+          <div class="ico">⚡</div>
+          <h3>Lightning fast</h3>
+          <p>Built for speed. Everything loads instantly so your flow never breaks.</p>
+        </div>
+        <div class="card">
+          <div class="ico">🧩</div>
+          <h3>All in one place</h3>
+          <p>Notes, tasks, and files together — no more jumping between ten different apps.</p>
+        </div>
+        <div class="card">
+          <div class="ico">🔒</div>
+          <h3>Private by design</h3>
+          <p>Your data stays yours. Encrypted, secure, and never sold to anyone.</p>
+        </div>
+      </div>
+    </section>
 
-    <div class="row">
-      <label><input type="checkbox" /> Remember me</label>
-      <a href="#">Forgot password?</a>
-    </div>
+    <section class="stats" id="stats">
+      <div class="stat"><b>12k+</b><span>Happy teams</span></div>
+      <div class="stat"><b>99.9%</b><span>Uptime</span></div>
+      <div class="stat"><b>4.9★</b><span>Average rating</span></div>
+    </section>
 
-    <button type="submit">Sign in</button>
+    <section class="band" id="start">
+      <h2>Ready to get started?</h2>
+      <p>Join thousands of teams already working smarter with Nova.</p>
+      <a href="#" class="btn btn-primary" onclick="alert('This is a demo landing page 🎉'); return false;">Create your free account</a>
+    </section>
 
-    <p class="msg" id="msg"></p>
-    <p class="foot">Don't have an account? <a href="#">Sign up</a></p>
-  </form>
-
-  <script>
-    document.getElementById('loginForm').addEventListener('submit', function (e) {
-      e.preventDefault();
-      var email = document.getElementById('email').value;
-      document.getElementById('msg').textContent = 'Welcome, ' + email + '! (demo — no data is sent)';
-    });
-  </script>
+    <footer>© 2026 Nova — a demo landing page. Made for sharing.</footer>
+  </div>
 </body>
 </html>
